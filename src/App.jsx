@@ -5,9 +5,21 @@ const App = () => {
   return (
     <div>
       <h1>Padres Gino's - Order Now</h1>
-      <Pizza name="Pepperoni" description="pep, cheese, n stuff" />
-      <Pizza name="Hawaiian" description="ham, pineapple, n stuff" />
-      <Pizza name="Americano" description="french fries, hot dogs" />
+      <Pizza
+        name="Pepperoni"
+        description="pep, cheese, n stuff"
+        image={"/public/pizzas/pepperoni.webp"}
+      />
+      <Pizza
+        name="Hawaiian"
+        description="ham, pineapple, n stuff"
+        image={"/public/pizzas/hawaiian.webp"}
+      />
+      <Pizza
+        name="Americano"
+        description="french fries, hot dogs"
+        image={"/public/pizzas/big_meat.webp"}
+      />
     </div>
   );
 };
