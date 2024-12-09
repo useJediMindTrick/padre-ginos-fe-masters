@@ -38,7 +38,7 @@ export default function Order() {
   return (
     <div className="order">
       <h2>Create Order Page</h2>
-      <form action="">
+      <form>
         <div>
           <div>
             <label htmlFor="pizza-type">Pizza Type</label>
@@ -92,21 +92,20 @@ export default function Order() {
               </span>
             </div>
           </div>
-          <button type="submit">Add to Cart</button>
+        </div>
+        <button type="submit">Add to Cart</button>
+        {loading ? (
+          <h1>Loading that darn Pizza lol</h1>
+        ) : (
           <div className="order-pizza">
-            {loading ? (
-              <h1>Loading that darn Pizza lol</h1>
-            ) : (
-              <Pizza
-                name={selectedPizza.name}
-                description={selectedPizza.description}
-                image={selectedPizza.image}
-              />
-            )}
-
+            <Pizza
+              name={selectedPizza.name}
+              description={selectedPizza.description}
+              image={selectedPizza.image}
+            />
             <p>{price}</p>
           </div>
-        </div>
+        )}
       </form>
     </div>
   );
