@@ -1,0 +1,4 @@
+-- SQLite
+SELECT * FROM orders ORDER BY date DESC;
+
+SELECT * FROM order_details WHERE order_id = 21352;
