@@ -459,3 +459,7 @@ td img {
   font-weight: normal;
   font-size: 30px;
 }
+
+.no-scroll {
+  overflow: hidden !important;
+}

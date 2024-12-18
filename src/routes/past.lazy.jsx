@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import getPastOrders from "../api/getPastOrders";
@@ -22,18 +22,28 @@ function PastOrdersRoute() {
   const { isLoading: isLoadingPastOrder, data: pastOrderData } = useQuery({
     queryKey: ["past-order", focusedOrder],
     queryFn: () => getPastOrder(focusedOrder),
-    staleTime: 24 * 60 * 60 * 1000,
-    enabled: !!focusedOrder, // force a truthy value
+    enabled: !!focusedOrder,
+    staleTime: 24 * 60 * 60 * 1000, // one day in milliseconds,
   });
+
+  useEffect(() => {
+    if (focusedOrder) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [focusedOrder]);
 
   if (isLoading) {
     return (
       <div className="past-orders">
-        <h2>LOADING ...</h2>
+        <h2>LOADING …</h2>
       </div>
     );
   }
-
   return (
     <div className="past-orders">
       <table>
@@ -62,6 +72,7 @@ function PastOrdersRoute() {
         <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
           Previous
         </button>
+        <div>{page}</div>
         <button disabled={data.length < 10} onClick={() => setPage(page + 1)}>
           Next
         </button>
@@ -73,12 +84,12 @@ function PastOrdersRoute() {
             <table>
               <thead>
                 <tr>
-                  <td> Image</td>
-                  <td> Name</td>
-                  <td> Size</td>
-                  <td> Quantity</td>
-                  <td> Price</td>
-                  <td> Total</td>
+                  <td>Image</td>
+                  <td>Name</td>
+                  <td>Size</td>
+                  <td>Quantity</td>
+                  <td>Price</td>
+                  <td>Total</td>
                 </tr>
               </thead>
               <tbody>
@@ -97,7 +108,7 @@ function PastOrdersRoute() {
               </tbody>
             </table>
           ) : (
-            <p>Loading...</p>
+            <p>Loading …</p>
           )}
           <button onClick={() => setFocusedOrder}>Close</button>
         </Modal>
