@@ -10,8 +10,6 @@ class ErrorBoundary extends Component {
     console.error("ErrorBoundary caught some stupid error", error, info);
   }
 
-  componentDidMount() {}
-
   render() {
     if (this.state.hasError) {
       return (
