@@ -39,13 +39,11 @@ function Order() {
 
   if (!loading) {
     selectedPizza = pizzaTypes.find((pizza) => pizzaType === pizza.id);
-
     price = intl.format(selectedPizza.sizes[pizzaSize]);
   }
 
   useEffect(() => {
     console.log("fetching pizzas");
-
     fetchPizzaTypes();
   }, []);
 
